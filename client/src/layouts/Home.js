@@ -10,20 +10,18 @@ import './Home.css';
 
 
 const Home = () => {
-    const [data,setData] = useState([])
-    const [download,setDownload] = useState(0)
-    const [upload,setUpload] = useState(0)
-    const [latencyData,setLatencyData] = useState(0)
-    const [jitterData,setJitterData] = useState(0)
+    const [download,setDownload] = useState(0);
+    const [upload,setUpload] = useState(0);
+    const [latencyData,setLatencyData] = useState(0);
+    const [jitterData,setJitterData] = useState(0);
     
     useEffect(()=>{
         let location_count = 0;
         let sum_downlaod = 0;
         let sum_upload = 0;
-        let sum_latency = 0;
         let lat_5 =0,lat_10 = 0,lat_15 = 0,lat_20 = 0;
         axios.get('http://localhost:5000/api/map').then((res)=>{
-            location_count = res.data.length
+            location_count = res.data.length;
             res.data.map(location=>{
                 console.log(location)
                 let lat = Number(location.avg_lat_ms_wt).toFixed()*1;
@@ -31,7 +29,6 @@ const Home = () => {
                 if( lat<15&&lat>=10) lat_10++
                 if( lat<20&&lat>=15) lat_15++
                 if( lat>=20) lat_20++
-                sum_latency += location.avg_lat_ms_wt
                 sum_upload += location.avg_u_mbps_wt
                 sum_downlaod += location.avg_d_mbps_wt
             })
