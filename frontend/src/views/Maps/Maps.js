@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server";
-import { Map, TileLayer, Polygon, GeoJSON, Tooltip} from 'react-leaflet';
+import { Map, GeoJSON} from 'react-leaflet';
 import { Box, InputLabel } from "@material-ui/core";
-import locations from "assets/data.json";
 import 'leaflet/dist/leaflet.css';
 import "assets/App.css";
 const defaultProps = {
@@ -15,19 +14,21 @@ const normalStyle = {
   fontSize: "20px",
   padding: "5px",
 };
+const mapStyle = {
+  width:'100%',
+  height:'500px',
+}
 function MyPopup(props) {
-  const { avg_d_mbps_wt,NeighName } = props;
+  const { avg_d_mbps_wt,avg_u_mbps_wt,NeighName } = props;
   return (
     <Box border={0}style={{ backgroundColor: "black" }} {...defaultProps}>
-        {/* <InputLabel style={normalStyle}>College Park Group B</InputLabel>
-        <InputLabel style={normalStyle}>EarthLink</InputLabel>
-        <InputLabel style={normalStyle}>200Mbps</InputLabel> */}
         <InputLabel style={normalStyle}>{NeighName} </InputLabel>
-        <InputLabel style={normalStyle}>{avg_d_mbps_wt} Mbps</InputLabel>
+        <InputLabel style={normalStyle}>Download:{avg_d_mbps_wt} Mbps</InputLabel>
+        <InputLabel style={normalStyle}>Upload:{avg_u_mbps_wt} Mbps</InputLabel>
     </Box>
   );
 }
-export default function Maps() {
+export default function Maps(props) {
     const onEachFeature = (feature, layer) => {
         const popupOptions = {
         minWidth: 250,
@@ -40,7 +41,9 @@ export default function Maps() {
         // console.log(feature);
         // var coordinates = feature.geometry.coordinates;
         // var swapped_coordinates = [coordinates[1], coordinates[0]];  //Swap Lat and Lng
-        var avg_d_mbps_wt = feature.properties.avg_d_mbps_wt;
+        console.log(feature)
+        var avg_d_mbps_wt = Math.round(feature.properties.avg_d_mbps_wt/1000);
+        var avg_u_mbps_wt = Math.round(feature.properties.avg_u_mbps_wt/1000);
         var NeighName = feature.properties.NeighName;
         layer.setStyle({
         weight: 0.1,
@@ -50,15 +53,15 @@ export default function Maps() {
         // fillColor: avg_d_mbps_wt > 150 ? color1 : avg_d_mbps_wt > 100 ? color2 : color3,
         fillColor: avg_d_mbps_wt > 150 ? color1 : avg_d_mbps_wt > 100 ? color2 : color3,
         });
-        const popupContentNode = <MyPopup avg_d_mbps_wt={avg_d_mbps_wt} NeighName={NeighName} />;
+        const popupContentNode = <MyPopup avg_d_mbps_wt={avg_d_mbps_wt} avg_u_mbps_wt={avg_u_mbps_wt} NeighName={NeighName} />;
         const popupContentHtml = ReactDOMServer.renderToString(popupContentNode);
         layer.bindTooltip(popupContentHtml, popupOptions);
     }
     return (
         <div>
             {/* <Map center={[-81.35, 28.35]} zoom={9}> */}
-            <Map center={[28.45, -81.35]} zoom={11}  >
-                <GeoJSON data={locations} onEachFeature={onEachFeature} radius={200} crs={'urn:ogc:def:crs:EPSG::26916'} />
+            <Map center={[28.475, -81.35]} zoom={10.5} maxWidth={30} style={mapStyle}>
+                <GeoJSON data={props.locations} onEachFeature={onEachFeature} radius={200} crs={'urn:ogc:def:crs:EPSG::26916'} />
             </Map> 
         </div>
     );

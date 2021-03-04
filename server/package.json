@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "nodeplotlib": "^0.7.3"
+  },
+  "devDependencies": {
+    "map-tools": "^2.0.0"
+  }
+}
