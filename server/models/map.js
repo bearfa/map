@@ -11,15 +11,15 @@ const MapSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    avg_d_kbps: {
+    avg_d_mbps_wt: {
         type: Number,
         required: true
     },
-    avg_u_kbps: {
+    avg_u_mbps_wt: {
         type: Number,
         required: true
     },
-    avg_lat_ms: {
+    avg_lat_ms_wt: {
         type: Number,
         required: true
     },
@@ -30,10 +30,6 @@ const MapSchema = mongoose.Schema({
     tests: {
         type: Number,
         required: true,
-    },
-    quadkey: {
-        type: String,
-        required: true
     },
     geometry: {
         type: Object,

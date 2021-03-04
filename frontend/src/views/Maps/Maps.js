@@ -41,7 +41,6 @@ export default function Maps(props) {
         // console.log(feature);
         // var coordinates = feature.geometry.coordinates;
         // var swapped_coordinates = [coordinates[1], coordinates[0]];  //Swap Lat and Lng
-        console.log(feature)
         var avg_d_mbps_wt = Math.round(feature.properties.avg_d_mbps_wt/1000);
         var avg_u_mbps_wt = Math.round(feature.properties.avg_u_mbps_wt/1000);
         var NeighName = feature.properties.NeighName;

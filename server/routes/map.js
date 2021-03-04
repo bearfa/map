@@ -13,15 +13,13 @@ function saveEl(els,index) {
         return 'end';
     }
     const el = els[index]
-    console.log(index,els.length)
     const map = new Map({
         NeighID: el.properties.NeighID,
         NeighName: el.properties.NeighName,
-        avg_d_kbps: el.properties.avg_d_kbps,
-        avg_u_kbps: el.properties.avg_u_kbps,
-        avg_lat_ms: el.properties.avg_lat_ms,
+        avg_d_mbps_wt: el.properties.avg_d_mbps_wt,
+        avg_u_mbps_wt: el.properties.avg_u_mbps_wt,
+        avg_lat_ms_wt: el.properties.avg_lat_ms_wt,
         devices: el.properties.devices,
-        quadkey: el.properties.quadkey,
         tests: el.properties.tests,
         geometry:el.geometry
     })
@@ -34,7 +32,7 @@ function saveEl(els,index) {
         }else{
             console.log('dfdsfs')
             map.save(function(err){
-                if(err) return err
+                if(err) return console.log(err)
                 saveEl(els,index+1)
             });
         }
