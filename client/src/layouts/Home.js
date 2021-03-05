@@ -20,7 +20,7 @@ const Home = () => {
         let sum_downlaod = 0;
         let sum_upload = 0;
         let lat_5 =0,lat_10 = 0,lat_15 = 0,lat_20 = 0;
-        axios.get('http://localhost:5000/api/map').then((res)=>{
+        axios.get('http://192.168.109.167:5000/api/map').then((res)=>{
             location_count = res.data.length;
             res.data.map(location=>{
                 console.log(location)
@@ -55,33 +55,7 @@ const Home = () => {
                 <ChartCard title={'Jitter'} data={jitterData} type={'PieChart'} options={'PieChart'} />
             </div>
             <div className="row">
-                <div className="col-md-6">
-                <Chart
-                    title={'fsfdsfsd'}
-                    width={'100%'}
-                    height={'500px'}
-                    chartType="LineChart"
-                    loader={''}
-                    data={[
-                        ['x', 'dogs'],
-                        [0, 0],
-                        [1, 10],
-                        [2, 23],
-                        [3, 17],
-                    ]}
-                    options={{
-                        hAxis: {
-                        title: 'Time',
-                        },
-                        vAxis: {
-                        title: 'Popularity',
-                        },
-                        legend: 'none',
-                    }}
-                    rootProps={{ 'data-testid': '1' }}
-                />
-                </div>
-                <div className="col-md-6">
+                <div className="col-md-12">
                     <MAP_COMPONENT  locations={locations}/>
                 </div>
             </div>

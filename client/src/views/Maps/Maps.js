@@ -16,7 +16,7 @@ const normalStyle = {
 };
 const mapStyle = {
   width:'100%',
-  height:'500px',
+  height:'700px',
 }
 function MyPopup(props) {
   const { avg_d_mbps_wt,avg_u_mbps_wt,NeighName } = props;
@@ -59,7 +59,7 @@ export default function Maps(props) {
     return (
         <div>
             {/* <Map center={[-81.35, 28.35]} zoom={9}> */}
-            <Map center={[28.475, -81.35]} zoom={10.5} maxWidth={30} style={mapStyle}>
+            <Map center={[28.475, -81.35]} zoom={12} maxWidth={30} style={mapStyle}>
                 <GeoJSON data={props.locations} onEachFeature={onEachFeature} radius={200} crs={'urn:ogc:def:crs:EPSG::26916'} />
             </Map> 
         </div>
