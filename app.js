@@ -7,10 +7,10 @@ require('dotenv').config();
 const map = require('./routes/map.js');
 const config = require('./config.js');
 
-const MONGODB_URI = config.mongodburi || 'mongodb://localhost/netspeed';
+const MONGODB_URI = config.mongodburi || 'mongodb://localhost:27017/netspeed';
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect('mongodb://localhost:27017/netspeed', {
+mongoose.connect(MONGODB_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true

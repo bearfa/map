@@ -5,7 +5,7 @@ import Chart from "react-google-charts";
 import axios from 'axios';
 import SpeedCard from './SpeedCard';
 import ChartCard from './ChartCard';
-
+import {BASE_URL} from './../Config';
 import './Home.css';
 
 
@@ -20,7 +20,7 @@ const Home = () => {
         let sum_downlaod = 0;
         let sum_upload = 0;
         let lat_5 =0,lat_10 = 0,lat_15 = 0,lat_20 = 0;
-        axios.get('http://192.168.109.167:5000/api/map').then((res)=>{
+        axios.get(BASE_URL+'/api/map').then((res)=>{
             location_count = res.data.length;
             res.data.map(location=>{
                 console.log(location)
