@@ -1,4 +1,4 @@
-# Basic MERN Stack App
+# OpenMapJs
 
 ### Front-End - React + Redux
 
