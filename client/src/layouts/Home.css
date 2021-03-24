@@ -1,13 +1,25 @@
 .AddArticleButton {
     box-shadow: 3px 3px #547393;
 }
+.main{
+    height: 100%;
 
+}
 .Header {
     box-shadow: 3px 3px #ccc;
     border-radius: 5px;
     padding: 12px 0px 0px 12px;
 }
+body{
+    min-height: 100vh;
+    height: 100%;
+    background-image: url('../assets/img/bg.png');
+    background-size: cover;
 
+}
+#root{
+    height: 100%;
+}
 .ShowArticlesButton {
     box-shadow: 3px 3px #547393;
 }
@@ -15,9 +27,10 @@
    padding-top: 30px;
    font-weight: 700;
    font-size: 21px;
+   color: wheat;
 }
 .top-card-text{
-    color: #a70b7f;
+    color: #e7e7e7;
     height: 300px;
     vertical-align: middle;
     padding-top: 15vh;

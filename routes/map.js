@@ -15,12 +15,8 @@ function saveEl(els,index) {
     const el = els[index]
     const map = new Map({
         NeighID: el.properties.NeighID,
-        NeighName: el.properties.NeighName,
-        avg_d_mbps_wt: el.properties.avg_d_mbps_wt,
-        avg_u_mbps_wt: el.properties.avg_u_mbps_wt,
-        avg_lat_ms_wt: el.properties.avg_lat_ms_wt,
-        devices: el.properties.devices,
-        tests: el.properties.tests,
+        type: el.type,
+        properties: el.properties,
         geometry:el.geometry
     })
 
@@ -45,7 +41,7 @@ router.get('/importdata_save',async(req,res) => {
 })
 
 router.get('/', async (req, res) => {
-    Map.find().exec()
+    Map.find().select('type properties geometry -_id').exec()
         .then(maps =>{
             res.json(maps)
         })
@@ -54,13 +50,8 @@ router.post('/',async(req,res) => {
     console.log(req.body.properties.NeighName)
     const map = new Map({
         NeighID: req.body.properties.NeighID,
-        NeighName: req.body.properties.NeighName,
-        avg_d_kbps: req.body.properties.avg_d_kbps,
-        avg_u_kbps: req.body.properties.avg_u_kbps,
-        avg_lat_ms: req.body.properties.avg_lat_ms,
-        devices: req.body.properties.devices,
-        quadkey: req.body.properties.quadkey,
-        tests: req.body.properties.tests,
+        type: req.body.type,
+        properties: req.body.properties,
         geometry:req.body.geometry
     })
 

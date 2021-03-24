@@ -1,9 +1,11 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server";
-import { Map, GeoJSON} from 'react-leaflet';
+import { Map,TileLayer, GeoJSON} from 'react-leaflet';
 import { Box, InputLabel } from "@material-ui/core";
 import 'leaflet/dist/leaflet.css';
 import "assets/App.css";
+import { blackColor } from "assets/jss/material-dashboard-react";
+import {mapColor1,mapColor2,mapColor3,mapOpacity,mapBorderColor} from './../../Config';
 const defaultProps = {
   // border: 1,
   // borderColor: "grey.500",
@@ -35,9 +37,6 @@ export default function Maps(props) {
         maxWidth: 500,
         className: "popup-classname"
         };
-        const color1 = '#dc5256';
-        const color2 = '#5eb6e4';
-        const color3 = '#f0ca69';
         // console.log(feature);
         // var coordinates = feature.geometry.coordinates;
         // var swapped_coordinates = [coordinates[1], coordinates[0]];  //Swap Lat and Lng
@@ -45,23 +44,34 @@ export default function Maps(props) {
         var avg_u_mbps_wt = Math.round(feature.properties.avg_u_mbps_wt/1000);
         var NeighName = feature.properties.NeighName;
         layer.setStyle({
-        weight: 0.1,
-        // color: '#666',
-        color: '#000000',
-        // fillColor: 'white',
-        // fillColor: avg_d_mbps_wt > 150 ? color1 : avg_d_mbps_wt > 100 ? color2 : color3,
-        fillColor: avg_d_mbps_wt > 150 ? color1 : avg_d_mbps_wt > 100 ? color2 : color3,
+        weight: 1,
+        color: mapBorderColor,
+        fillColor: avg_d_mbps_wt > 150 ? mapColor1 : avg_d_mbps_wt > 100 ? mapColor2: mapColor3,
+        fillOpacity:mapOpacity,
         });
         const popupContentNode = <MyPopup avg_d_mbps_wt={avg_d_mbps_wt} avg_u_mbps_wt={avg_u_mbps_wt} NeighName={NeighName} />;
         const popupContentHtml = ReactDOMServer.renderToString(popupContentNode);
         layer.bindTooltip(popupContentHtml, popupOptions);
     }
-    return (
+    console.log(props)
+    if(props.locations.length){
+      return (
+          <div>
+              {/* <Map center={[-81.35, 28.35]} zoom={9}> */}
+              <Map center={[28.475, -81.35]} zoom={12} maxWidth={30} style={mapStyle}>
+                <TileLayer
+                    // attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <GeoJSON data={props.locations} onEachFeature={onEachFeature} radius={2000} crs={'urn:ogc:def:crs:EPSG::26916'} />
+              </Map> 
+          </div>
+      );
+    }else{
+      return (
         <div>
-            {/* <Map center={[-81.35, 28.35]} zoom={9}> */}
-            <Map center={[28.475, -81.35]} zoom={12} maxWidth={30} style={mapStyle}>
-                <GeoJSON data={props.locations} onEachFeature={onEachFeature} radius={200} crs={'urn:ogc:def:crs:EPSG::26916'} />
-            </Map> 
+          
         </div>
-    );
+      )
+    }
 }

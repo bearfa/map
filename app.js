@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors');
 require('dotenv').config();
 
 const map = require('./routes/map.js');
@@ -24,6 +25,11 @@ mongoose.connection.on('error', (error) => {
 
 let app = express();
 
+var corsOptions ={
+    origin:'http://localhost:3000',
+};
+
+app.use(cors(corsOptions));
 // Body Parser Middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -40,7 +46,7 @@ app.use((req, res, next) => {
      next();
 });
 
-app.use('/api/map', map);
+app.use('/api/map',cors(corsOptions), map);
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/build/index.html'));

@@ -1,3 +1,4 @@
+import { NightsStay } from '@material-ui/icons';
 import React from 'react';
 import Chart from "react-google-charts";
 
@@ -18,7 +19,7 @@ const ChartCard = (props) => {
                     // Just add this option
                     pieHole: 0.4,
                     legend: 'none',
-
+                    backgroundColor: 'none'
                 }}
                 rootProps={{ 'data-testid': '3' }}
                 />
