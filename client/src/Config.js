@@ -1,8 +1,8 @@
 module.exports={
-    BASE_URL:'localhost:5000',
-    mapColor1:'#fff',
-    mapColor2:'#aaa',
-    mapColor3:'#555',
+    BASE_URL:'http://localhost:5000',
+    mapColor1:'red',
+    mapColor2:'green',
+    mapColor3:'blue',
     mapOpacity:1,
     mapBorderColor:'#000',
     
