@@ -4,8 +4,7 @@ import { Map,TileLayer, GeoJSON} from 'react-leaflet';
 import { Box, InputLabel } from "@material-ui/core";
 import 'leaflet/dist/leaflet.css';
 import "assets/App.css";
-import { blackColor } from "assets/jss/material-dashboard-react";
-import {mapColor1,mapColor2,mapColor3,mapOpacity,mapBorderColor} from './../../Config';
+import {mapColor1,mapColor2,mapColor3,mapOpacity,mapBorderColor} from '../Config';
 const defaultProps = {
   // border: 1,
   // borderColor: "grey.500",

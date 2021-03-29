@@ -1,9 +1,7 @@
 import React, { useState,useEffect } from 'react';
-import MAP_COMPONENT from "../views/Maps/Maps";
+import MAP_COMPONENT from "./Maps";
 import locations from "assets/data.json";
-import Chart from "react-google-charts";
 import axios from 'axios';
-import _ from 'lodash';
 import SpeedCard from './SpeedCard';
 import ChartCard from './ChartCard';
 import {BASE_URL} from './../Config';
@@ -33,6 +31,7 @@ const Home = () => {
                 if( lat>=20) lat_20++
                 sum_upload += location.properties.avg_u_mbps_wt
                 sum_downlaod += location.properties.avg_d_mbps_wt
+                return true;
             })
             setDownload(Math.round(sum_downlaod/location_count/1000))
             setUpload(Math.round(sum_upload/location_count/1000))
