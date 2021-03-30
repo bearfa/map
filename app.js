@@ -6,6 +6,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const map = require('./routes/map.js');
+const speedTest = require('./routes/speedTest.js');
 const config = require('./config.js');
 
 const MONGODB_URI = config.mongodburi || 'mongodb://localhost:27017/netspeed';
@@ -47,6 +48,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/map',cors(corsOptions), map);
+app.use('/api/speedTest',cors(corsOptions), speedTest);
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/build/index.html'));

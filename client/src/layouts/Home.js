@@ -6,6 +6,7 @@ import SpeedCard from './SpeedCard';
 import ChartCard from './ChartCard';
 import {BASE_URL} from './../Config';
 import './Home.css';
+import { Button } from "@material-ui/core";
 
 
 const Home = () => {
@@ -15,6 +16,11 @@ const Home = () => {
     const [jitterData,setJitterData] = useState(0);
     const [mapData,setMapData] = useState([]);
     
+    const handleSpeedTest = () => {
+        axios.get(BASE_URL+'/api/speedtest').then((res)=>{
+            console.log(res)
+        });
+    }
     useEffect(()=>{
         let location_count = 0;
         let sum_downlaod = 0;
@@ -52,8 +58,10 @@ const Home = () => {
             <div className="row">
                 <SpeedCard title={'Upload'} data={upload}/>
                 <SpeedCard title={'Downlaod'} data={download}/>
-                <ChartCard title={'Latency'} data={latencyData} type={'PieChart'} options={'PieChart'} />
-                <ChartCard title={'Jitter'} data={jitterData} type={'PieChart'} options={'PieChart'} />
+
+            </div>
+            <div className="row">
+                <Button variant="contained" color="primary" onClick={()=>handleSpeedTest()} >Test Speed</Button>
             </div>
             <div className="row">
                 <div className="col-md-12">
