@@ -15,10 +15,15 @@ const Home = () => {
     const [latencyData,setLatencyData] = useState(0);
     const [jitterData,setJitterData] = useState(0);
     const [mapData,setMapData] = useState([]);
+    const [homeData,SetHomeData] = useState({});
     
     const handleSpeedTest = () => {
         axios.get(BASE_URL+'/api/speedtest').then((res)=>{
-            console.log(res)
+            console.log(res.data.download.bytes)
+            SetHomeData({
+                download:(res.data.download.bytes/1048576).toFixed(0),
+                upload:(res.data.upload.bytes/1048576).toFixed(0)
+            });
         });
     }
     useEffect(()=>{
@@ -56,8 +61,8 @@ const Home = () => {
     return (
         <div className={'main'}>
             <div className="row">
-                <SpeedCard title={'Upload'} data={upload}/>
-                <SpeedCard title={'Downlaod'} data={download}/>
+                <SpeedCard title={'Upload'} data={homeData.upload}/>
+                <SpeedCard title={'Downlaod'} data={homeData.download}/>
 
             </div>
             <div className="row">

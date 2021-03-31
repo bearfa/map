@@ -7,8 +7,6 @@ router.get('/',async(req,res) => {
         res.json(data);
       } catch (err) {
         console.log(err.message);
-      } finally {
-        process.exit(0);
       }
 })
 
